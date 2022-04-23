@@ -2,6 +2,7 @@ var randomNumber = Math.floor(Math.random() * 4);
 var simonColors = ["red", "blue", "yellow", "green"];
 var simonArray = [];
 var userArray = [];
+var cnt = 1;
 function makeSound(color)
 {
     var audio = new Audio("./sounds/" + color + ".mp3");
@@ -17,8 +18,15 @@ function addEffect(color)
 }
 function init()
 {
-    for(let i=0;i<8;i++) addEffect(simonColors[randomNumber]);
-    makeSound(simonColors[randomNumber]);
+    setTimeout(function()
+    {
+        $("h1").text("level: " + cnt++); 
+        for(let i=0;i<8;i++)
+        {
+            addEffect(simonColors[randomNumber]);
+        }
+        makeSound(simonColors[randomNumber]);
+    }, 2000);
 }
 simonArray.push(simonColors[randomNumber]);
 init();
@@ -50,9 +58,14 @@ $(".btn").click(function(event)
                 makeSound("wrong");
                 userArray = [];
                 simonArray = [];
+                setTimeout(function()
+                {
+                    location.reload();
+                }, 3000);
             }
             else
             {
+                $("h1").text("level: " + cnt++);
                 userArray = [];
                 randomNumber = Math.floor(Math.random() * 4);
                 simonArray.push(simonColors[randomNumber]);
@@ -68,5 +81,8 @@ $(".btn").click(function(event)
         makeSound("wrong");
         userArray = [];
         simonArray = [];
+        setTimeout(function(){
+            location.reload();
+        }, 3000);
     }
 });
