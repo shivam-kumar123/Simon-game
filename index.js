@@ -2,13 +2,9 @@ var randomNumber = Math.floor(Math.random() * 4);
 var simonColors = ["red", "blue", "yellow", "green"];
 var simonArray = [];
 var userArray = [];
-var turn = true;
-simonArray.push(simonColors[randomNumber]);
-makeSound(simonColors[randomNumber]);
-addEffect(simonColors[randomNumber]);
 function makeSound(color)
 {
-    var audio = new Audio("sounds/" + color + ".mp3");
+    var audio = new Audio("./sounds/" + color + ".mp3");
     audio.play();
 }
 function addEffect(color)
@@ -19,6 +15,13 @@ function addEffect(color)
         $("#" + color).removeClass("pressed");
     } , 100);
 }
+function init()
+{
+    for(let i=0;i<8;i++) addEffect(simonColors[randomNumber]);
+    makeSound(simonColors[randomNumber]);
+}
+simonArray.push(simonColors[randomNumber]);
+init();
 function checking()
 {
     for(var i=0;i<userArray.length;i++)
@@ -55,7 +58,6 @@ $(".btn").click(function(event)
                 simonArray.push(simonColors[randomNumber]);
                 makeSound(simonColors[randomNumber]);
                 addEffect(simonColors[randomNumber]);
-                console.log(simonArray);
             }
         }, 1000);
     }
